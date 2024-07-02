@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operações Matemáticas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e0f7fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            color: #00796b;
+        }
+        input[type="text"], input[type="number"] {
+            padding: 10px;
+            width: calc(100% - 22px);
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px;
+            background-color: #00796b;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #004d40;
+        }
+        .result {
+            margin-top: 20px;
+            color: #004d40;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Operações Matemáticas</h1>
+        <input type="text" id="nomeInput" placeholder="Digite seu nome">
+        <input type="number" id="idadeInput" placeholder="Digite sua idade">
+        <button id="submitButton">Enviar</button>
+        <div class="result" id="resultDiv"></div>
+        <h1>Calculadora</h1>
+        <input type="number" id="numero1Input" placeholder="Digite o primeiro número">
+        <input type="number" id="numero2Input" placeholder="Digite o segundo número">
+        <input type="text" id="operacaoInput" placeholder="Digite a operação (+, -, *, /)">
+        <button id="calculateButton">Calcular</button>
+        <div class="result" id="calcResultDiv"></div>
+    </div>
+
+    <script>
+        document.getElementById('submitButton').addEventListener('click', function() {
+            const nome = document.getElementById('nomeInput').value;
+            const idade = document.getElementById('idadeInput').value;
+
+            if (nome === '' || idade === '') {
+                alert('Por favor, preencha todos os campos.');
+                return;
+            }
+
+            const mensagemConcat = 'Olá, meu nome é ' + nome + ' e eu tenho ' + idade + ' anos.';
+            const mensagemTemplate = `Olá, meu nome é ${nome} e eu tenho ${idade} anos.`;
+
+            console.log(mensagemConcat);
+            console.log(mensagemTemplate);
+
+            document.getElementById('resultDiv').innerText = mensagemTemplate;
+        });
+
+        document.getElementById('calculateButton').addEventListener('click', function() {
+            const numero1 = parseFloat(document.getElementById('numero1Input').value);
+            const numero2 = parseFloat(document.getElementById('numero2Input').value);
+            const operacao = document.getElementById('operacaoInput').value;
+
+            if (isNaN(numero1) || isNaN(numero2) || operacao === '') {
+                alert('Por favor, preencha todos os campos.');
+                return;
+            }
+
+            let resultado;
+
+            switch (operacao) {
+                case '+':
+                    resultado = numero1 + numero2;
+                    break;
+                case '-':
+                    resultado = numero1 - numero2;
+                    break;
+                case '*':
+                    resultado = numero1 * numero2;
+                    break;
+                case '/':
+                    if (numero2 === 0) {
+                        alert('Divisão por zero não é permitida.');
+                        return;
+                    }
+                    resultado = numero1 / numero2;
+                    break;
+                default:
+                    alert('Operação inválida. Use +, -, * ou /.');
+                    return;
+            }
+
+            console.log(`Resultado: ${resultado}`);
+            document.getElementById('calcResultDiv').innerText = `Resultado: ${resultado}`;
+        });
+    </script>
+</body>
+</html>
